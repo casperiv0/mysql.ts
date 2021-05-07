@@ -6,6 +6,7 @@
   "private": false,
   "scripts": {
     "build": "rm -rf dist/ && tsc",
+    "build:tsc": "tsc --noEmit",
     "test": "ts-node tests/index.test.ts",
     "lint": "eslint . --ext .ts,.tsx",
     "format": "prettier --write \"**/*.{js,jsx,json,ts,tsx,yml}\" --ignore-path .gitignore"
