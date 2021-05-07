@@ -5,19 +5,19 @@
 ### npm
 
 ```bash
-npm i mysql.ts
+npm i @casper124578/mysql.ts
 ```
 
 ### Yarn
 
 ```bash
-yarn add mysql.ts
+yarn add @casper124578/mysql.ts
 ```
 
 ## Usage
 
 ```ts
-import { createConnection } from "mysql.ts";
+import { createConnection } from "@casper124578/mysql.ts";
 
 async function init() {
   const connection = await createConnection({

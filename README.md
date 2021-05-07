@@ -1,27 +1,29 @@
 # mysql.ts
 
-A simple node.js MySQL wrapper made with TypeScript.
+![size](https://img.shields.io/bundlephobia/min/@casper124578/mysql.ts/latest)
+![license](https://img.shields.io/github/license/dev-caspertheghost/mysql.ts)
+![maintained](https://img.shields.io/badge/maintained-yes-green)
 
-**This package is still in development!**
+A simple node.js MySQL wrapper made with TypeScript.
 
 ## Installation
 
 ### npm
 
 ```bash
-npm i mysql.ts
+npm i @casper124578/mysql.ts
 ```
 
 ### Yarn
 
 ```bash
-yarn add mysql.ts
+yarn add @casper124578/mysql.ts
 ```
 
 ## Usage
 
 ```ts
-import { createConnection } from "mysql.ts";
+import { createConnection } from "@casper124578/mysql.ts";
 
 async function init() {
   const connection = await createConnection({
