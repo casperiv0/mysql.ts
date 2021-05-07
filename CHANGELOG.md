@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.0.8
+
+- better TypeScript support
+
+**Breaking change:**
+
+`query().exec<T>()` has been replaced with `query<T>().exec()` for better TypeScript support
+
+```diff
+- const results = await connection.query().select("*").exec<T>() ...
++ const results = await connection.query<T>().select("*").exec() ...
+```
+
 ## 0.0.7
 
 - Add new methods: `beginTransaction`, `changeUser`, `commit`, `ping`, `rollback`, `statistics`

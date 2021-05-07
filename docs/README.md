@@ -31,6 +31,40 @@ async function init() {
 }
 ```
 
+## TypeScript support
+
+```ts
+interface MyData {
+  id: string;
+  fist_name: string;
+  last_name: string;
+}
+
+const connection = await createConnection({
+  /* ... */
+});
+
+const books = await connection
+  .query<MyData>()
+  // will have types!
+  .select(["last_name", "fist_name"])
+  .from("books")
+  // will have types!
+  .where("last_name", "hello")
+  // will have types!
+  .order("last_name", "ASC")
+  .exec();
+```
+
+#### Methods with types
+
+- `select`
+- `insert`
+- `update`
+- `where`
+- `order`
+- `and`
+
 ## More
 
 - [Query](./Query.md)

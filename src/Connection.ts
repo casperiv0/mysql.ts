@@ -80,8 +80,8 @@ export class Connection {
     return promisify.apply(this.connection, ["ping", options]);
   }
 
-  query(): QueryBuilder {
-    return new QueryBuilder(this.connection);
+  query<T = any>(): QueryBuilder<T> {
+    return new QueryBuilder<T>(this.connection);
   }
 
   resume(): void {

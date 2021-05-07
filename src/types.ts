@@ -1,6 +1,6 @@
-import mysql from "mysql";
+import { ConnectionConfig as MySQLConnectionConfig } from "mysql";
 
-export interface ConnectionConfig extends mysql.ConnectionConfig {
+export interface ConnectionConfig extends MySQLConnectionConfig {
   reconnect?: boolean;
 }
 

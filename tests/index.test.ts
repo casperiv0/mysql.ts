@@ -9,12 +9,18 @@ async function test() {
     reconnect: true,
   });
 
-  const x = await conn.query().select(["id", "full_name", "user_id"]).from("citizens").order("full_name", "ASC").exec();
-  console.log(x);
+  const x = await conn
+    .query<{ username: string; id: string }>()
+    .select("*")
+    .from("users")
+    .where("username", "qsd")
+    .order("username", "ASC")
+    .exec();
 
+  console.log(x);
   console.log(conn.threadId);
 
-  conn.end({ timeout: 500, sql: "" });
+  conn.end();
 }
 
 test();

@@ -1,6 +1,6 @@
 import mysql from "mysql";
 
-export class QueryBuilder {
+export class QueryBuilder<T = any> {
   private connection: mysql.Connection;
   query: string;
   values: unknown[];
@@ -22,11 +22,11 @@ export class QueryBuilder {
    * // multiple items
    * <Connection>.query().select(["id", "name"]).from("books");
    */
-  select(selector: string | string[]) {
-    if (typeof selector === "string") {
-      this.query += `SELECT ${selector} `;
-    } else {
+  select(selector: keyof T | (keyof T)[] | "*") {
+    if (Array.isArray(selector)) {
       this.query += `SELECT ${selector.join(", ")} `;
+    } else {
+      this.query += `SELECT ${selector} `;
     }
 
     return this;
@@ -43,7 +43,7 @@ export class QueryBuilder {
    * @param tableName The name of the table
    * @param data Data that needs to be inserted
    */
-  insert<T = Record<string, unknown>>(tableName: string, data: T) {
+  insert(tableName: string, data: T) {
     const values = Object.keys(data).map((key) => {
       return `${(data as any)[key]}`;
     });
@@ -59,7 +59,7 @@ export class QueryBuilder {
    * @param tableName The name of the table
    * @param data Data that needs to be updated
    */
-  update<T = Record<string, unknown>>(tableName: string, data: T) {
+  update(tableName: string, data: T) {
     const values = Object.keys(data).map((key) => {
       return `${(data as any)[key]}`;
     });
@@ -90,21 +90,21 @@ export class QueryBuilder {
     return this;
   }
 
-  where(selector: string, value: string) {
+  where(selector: keyof T, value: string) {
     this.query += `WHERE ${selector} = ? `;
     this.values.push(value);
 
     return this;
   }
 
-  and(selector: string, value: string) {
+  and(selector: keyof T, value: string) {
     this.query += `AND ${selector} = ? `;
     this.values.push(value);
 
     return this;
   }
 
-  order(selector: string, type: "ASC" | "DESC") {
+  order(selector: keyof T, type: "ASC" | "DESC") {
     this.query += `ORDER BY ${selector} ${type.toUpperCase()} `;
 
     return this;
@@ -144,7 +144,7 @@ export class QueryBuilder {
   /**
    * Execute the query
    */
-  async exec<T>(options?: Omit<mysql.QueryOptions, "sql" | "values">): Promise<T[]> {
+  async exec(options?: Omit<mysql.QueryOptions, "sql" | "values">): Promise<T[]> {
     return new Promise((resolve, reject) => {
       const opts = options ? { ...options, sql: this.query, values: this.values } : this.query;
 
@@ -161,7 +161,7 @@ export class QueryBuilder {
     });
   }
 
-  private createKeys<T>(data: T) {
+  private createKeys(data: T) {
     return Object.keys(data)
       .map((key) => {
         return `\`${key}\``;
@@ -169,7 +169,7 @@ export class QueryBuilder {
       .join(", ");
   }
 
-  private createValues<T>(data: T) {
+  private createValues(data: T) {
     return Object.keys(data)
       .map(() => "?")
       .join(", ");
