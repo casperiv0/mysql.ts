@@ -9,15 +9,13 @@ async function test() {
     reconnect: true,
   });
 
-  const sql = conn.query.select("*").from("citizens").order("full_name", "ASC");
+  // const sql = conn.query.select("*").from("citizens").order("full_name", "ASC");
+  const sql = conn.query.raw("SELECT * FROM `citizens`").where("id", "a22e0c79-5ecd-4012-85bb-a214196e2d72");
 
   // const sql = conn.query.delete("citizens").where("id", "b33a9b77-3313-43df-a2c2-1e6e20858b81");
   const result = await sql.exec().catch(console.error);
 
-  console.log(conn.query.values);
-  console.log(conn.query.query);
-
-  console.log(result);
+  result;
 
   await conn.end();
 }

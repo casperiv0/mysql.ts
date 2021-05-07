@@ -45,7 +45,6 @@ export class QueryBuilder {
    */
   insert<T = Record<string, unknown>>(tableName: string, data: T) {
     const values = Object.keys(data).map((key) => {
-      // eslint-disable-next-line
       return `${(data as any)[key]}`;
     });
 
@@ -80,10 +79,10 @@ export class QueryBuilder {
    * @param selector The table name
    * @example
    * // delete an item with 'where'
-   * <Connection>.query.delete("books").where("name", "cool-book-name");
+   * <Connection>.query.delete("books").where("name", "cool-book-name").exec();
    *
    * // delete all items from table
-   * <Connection>.query.delete("books");
+   * <Connection>.query.delete("books").exec();
    */
   delete(selector: string) {
     this.query = `DELETE FROM ${selector} `;
@@ -116,9 +115,21 @@ export class QueryBuilder {
     return this;
   }
 
-  raw(query: string, values: unknown[]) {
-    this.query = query;
-    this.values = values;
+  /**
+   * Create a raw query
+   * @param query The raw query
+   * @param values Values that are needed for insert, update, ..
+   * @example
+   *
+   * // Full raw query
+   * <Connection>.query.raw("SELECT * FROM `books`").exec();
+   *
+   * // With chaining
+   * <Connection>.query.raw("SELECT * FROM `books`").where("name", "cool-book-name").exec();
+   */
+  raw(query: string, values?: unknown[]) {
+    this.query = `${query} `;
+    this.values = values ?? [];
 
     return this;
   }

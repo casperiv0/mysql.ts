@@ -1,6 +1,6 @@
 {
   "name": "mysql.ts",
-  "version": "0.0.0-alpha",
+  "version": "0.0.1",
   "description": "A simple mysql wrapper for node.js",
   "main": "dist/index.js",
   "scripts": {

@@ -25,6 +25,7 @@
     "no-useless-catch": ["warn"],
     "prettier/prettier": ["error"],
     "@typescript-eslint/no-explicit-any": "off",
-    "@typescript-eslint/explicit-module-boundary-types": "off"
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "prefer-rest-params": "off"
   }
 }
