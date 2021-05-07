@@ -36,3 +36,7 @@ async function init() {
   console.log(results);
 }
 ```
+
+## Documentation
+
+[You can check the documentation here](https://github.com/Dev-CasperTheGhost/mysql.ts/tree/main/docs)

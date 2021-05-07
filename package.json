@@ -1,12 +1,14 @@
 {
   "name": "@casper124578/mysql.ts",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A simple mysql wrapper for node.js",
   "main": "dist/index.js",
   "private": false,
   "scripts": {
     "build": "rm -rf dist/ && tsc",
-    "test": "ts-node tests/index.test.ts"
+    "test": "ts-node tests/index.test.ts",
+    "lint": "eslint . --ext .ts,.tsx",
+    "format": "prettier --write \"**/*.{js,jsx,json,ts,tsx,yml}\" --ignore-path .gitignore"
   },
   "keywords": [
     "mysql",
@@ -18,6 +20,14 @@
     "name": "Dev-CasperTheGhost",
     "url": "https://caspertheghost.me"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Dev-CasperTheGhost/mysql.ts"
+  },
+  "bugs": {
+    "url": "https://github.com/Dev-CasperTheGhost/mysql.ts/issues"
+  },
+  "homepage": "https://github.com/Dev-CasperTheGhost/mysql.ts#readme",
   "license": "MIT",
   "dependencies": {
     "mysql": "^2.18.1"
