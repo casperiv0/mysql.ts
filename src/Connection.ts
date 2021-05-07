@@ -6,7 +6,6 @@ export class Connection {
   public config: ConnectionConfig | string;
   public connection!: mysql.Connection;
   private reconnect: boolean;
-  public query!: QueryBuilder;
 
   constructor(config: ConnectionConfig | string = {}) {
     let _connection: mysql.Connection;
@@ -31,10 +30,13 @@ export class Connection {
       })
       .then((connection) => {
         this.connection = connection;
-        this.query = new QueryBuilder(connection);
 
         return this;
       });
+  }
+
+  query() {
+    return new QueryBuilder(this.connection);
   }
 
   destroy() {

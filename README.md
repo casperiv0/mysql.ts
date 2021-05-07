@@ -31,7 +31,7 @@ async function init() {
   });
 
   // query something
-  const results = await connection.query.select(["id", "name"]).from("books").exec();
+  const results = await connection.query().select(["id", "name"]).from("books").exec();
 
   console.log(results);
 }

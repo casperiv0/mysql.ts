@@ -17,10 +17,10 @@ export class QueryBuilder {
    * @example
    *
    * // 1 item
-   * <Connection>.query.select("id").from("books");
+   * <Connection>.query().select("id").from("books");
    *
    * // multiple items
-   * <Connection>.query.select(["id", "name"]).from("books");
+   * <Connection>.query().select(["id", "name"]).from("books");
    */
   select(selector: string | string[]) {
     if (typeof selector === "string") {
@@ -79,10 +79,10 @@ export class QueryBuilder {
    * @param selector The table name
    * @example
    * // delete an item with 'where'
-   * <Connection>.query.delete("books").where("name", "cool-book-name").exec();
+   * <Connection>.query().delete("books").where("name", "cool-book-name").exec();
    *
    * // delete all items from table
-   * <Connection>.query.delete("books").exec();
+   * <Connection>.query().delete("books").exec();
    */
   delete(selector: string) {
     this.query = `DELETE FROM ${selector} `;
@@ -129,10 +129,10 @@ export class QueryBuilder {
    * @example
    *
    * // Full raw query
-   * <Connection>.query.raw("SELECT * FROM `books`").exec();
+   * <Connection>.query().raw("SELECT * FROM `books`").exec();
    *
    * // With chaining
-   * <Connection>.query.raw("SELECT * FROM `books`").where("name", "cool-book-name").exec();
+   * <Connection>.query().raw("SELECT * FROM `books`").where("name", "cool-book-name").exec();
    */
   raw(query: string, values?: unknown[]) {
     this.query = `${query} `;

@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.0.6
+
+**Breaking change:**
+
+`<Connection>.query` has been replaced with `<Connection>.query()`
+
+```diff
+- const results = await connection.query.select("*") ...
++ const results = await connection.query().select("*") ...
+```
+
 ## 0.0.5
 
 - fix: cleanup query after `exec`
