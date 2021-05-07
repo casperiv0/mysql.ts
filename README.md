@@ -37,6 +37,10 @@ async function init() {
 }
 ```
 
+## Example
+
+You can [check an example here](https://github.com/Dev-CasperTheGhost/myqsl.ts-example)
+
 ## Documentation
 
 [You can check the documentation here](https://github.com/Dev-CasperTheGhost/mysql.ts/tree/main/docs)
