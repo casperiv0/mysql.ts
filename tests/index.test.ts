@@ -12,9 +12,9 @@ async function test() {
   const x = await conn.query().select(["id", "full_name", "user_id"]).from("citizens").order("full_name", "ASC").exec();
   console.log(x);
 
-  // const sql = conn.query().delete("citizens").where("id", "b33a9b77-3313-43df-a2c2-1e6e20858b81");
+  console.log(conn.threadId);
 
-  await conn.end();
+  conn.end({ timeout: 500, sql: "" });
 }
 
 test();

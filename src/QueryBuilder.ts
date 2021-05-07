@@ -144,9 +144,11 @@ export class QueryBuilder {
   /**
    * Execute the query
    */
-  async exec<T>(): Promise<T[]> {
+  async exec<T>(options?: Omit<mysql.QueryOptions, "sql" | "values">): Promise<T[]> {
     return new Promise((resolve, reject) => {
-      this.connection.query(this.query, this.values, (err, results) => {
+      const opts = options ? { ...options, sql: this.query, values: this.values } : this.query;
+
+      this.connection.query(opts, this.values, (err, results) => {
         this.query = "";
         this.values = [];
 

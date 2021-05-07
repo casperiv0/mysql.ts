@@ -39,8 +39,8 @@ async function init() {
 
 ## Example
 
-You can [check an example here](https://github.com/Dev-CasperTheGhost/mysql.ts-example)
+You can [view an example here](https://github.com/Dev-CasperTheGhost/mysql.ts-example)
 
 ## Documentation
 
-[You can check the documentation here](https://github.com/Dev-CasperTheGhost/mysql.ts/tree/main/docs)
+[You can view the documentation here](https://github.com/Dev-CasperTheGhost/mysql.ts/tree/main/docs)

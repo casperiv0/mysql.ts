@@ -1,6 +1,7 @@
-import mysql from "mysql";
+import mysql, { OkPacket } from "mysql";
+import { promisify } from "./promisify";
 import { QueryBuilder } from "./QueryBuilder";
-import { ConnectionConfig } from "./types";
+import { ChangeUserOptions, ConnectionConfig, EventNames, StatisticsPacket } from "./types";
 
 export class Connection {
   public config: ConnectionConfig | string;
@@ -35,47 +36,71 @@ export class Connection {
       });
   }
 
-  query() {
-    return new QueryBuilder(this.connection);
+  get state(): string {
+    return this.connection.state;
   }
 
-  destroy() {
+  get threadId(): number | null {
+    return this.connection.threadId;
+  }
+
+  beginTransaction(options?: mysql.QueryOptions): Promise<void> {
+    return promisify.apply(this.connection, ["beginTransaction", options]);
+  }
+
+  changeUser(options?: ChangeUserOptions): Promise<void> {
+    return promisify.apply(this.connection, ["changeUser", options]);
+  }
+
+  commit(): Promise<void> {
+    return promisify.apply(this.connection, ["commit", null]);
+  }
+
+  end(options?: mysql.QueryOptions): Promise<void> {
+    return promisify.apply(this.connection, ["end", options]);
+  }
+
+  destroy(): void {
     this.connection.destroy();
   }
 
-  end() {
-    return new Promise((resolve, reject) => {
-      return this.connection.end((err) => {
-        if (err) {
-          return reject(err);
-        }
-
-        resolve(true);
-      });
-    });
-  }
-
-  format(sql: string, values: unknown[]) {
+  format(sql: string, values: unknown[]): string {
     return this.connection.format(sql, values);
   }
 
-  pause() {
+  on(eventName: EventNames, listener: (...args: any[]) => void) {
+    this.connection.on(eventName, listener);
+  }
+
+  pause(): void {
     this.connection.pause();
   }
 
-  resume() {
+  ping(options?: mysql.QueryOptions): Promise<OkPacket> {
+    return promisify.apply(this.connection, ["ping", options]);
+  }
+
+  query(): QueryBuilder {
+    return new QueryBuilder(this.connection);
+  }
+
+  resume(): void {
     this.connection.resume();
   }
 
-  on(eventName: string, listener: (...args: any[]) => void) {
-    this.connection.on(eventName, listener);
+  rollback(options?: mysql.QueryOptions) {
+    return promisify.apply(this.connection, ["rollback", options]);
+  }
+
+  statistics(options?: mysql.QueryOptions): Promise<StatisticsPacket> {
+    return promisify.apply(this.connection, ["statistics", options]);
   }
 
   async connect(): Promise<mysql.Connection> {
     const connection = mysql.createConnection(this.config);
 
     return new Promise((resolve, reject) => {
-      connection.connect((err) => {
+      return connection.connect(async (err) => {
         if (err) {
           return reject(err);
         }

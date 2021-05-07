@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.0.7
+
+- Add new methods: `beginTransaction`, `changeUser`, `commit`, `ping`, `rollback`, `statistics`
+- Add `StatisticsPacket` and `ChangeUserOptions` typings
+- Able to pass options to `QueryBuilder#exec`
+- Export correct types
+
 ## 0.0.6
 
 **Breaking change:**
