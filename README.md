@@ -39,7 +39,7 @@ async function init() {
 
 ## Example
 
-You can [check an example here](https://github.com/Dev-CasperTheGhost/myqsl.ts-example)
+You can [check an example here](https://github.com/Dev-CasperTheGhost/mysql.ts-example)
 
 ## Documentation
 
