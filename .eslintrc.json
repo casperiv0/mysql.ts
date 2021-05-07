@@ -16,7 +16,7 @@
     "semi": ["error", "always"],
     "no-multi-spaces": ["error"],
     "eqeqeq": ["warn", "always"],
-    "no-unused-vars": ["error"],
+    "no-unused-vars": "off",
     "no-duplicate-case": ["error"],
     "no-extra-semi": ["error"],
     "no-unreachable": ["error"],

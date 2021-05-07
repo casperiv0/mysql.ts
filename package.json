@@ -1,5 +1,5 @@
 {
-  "name": "@casper124578/node-mysql",
+  "name": "mysql.ts",
   "version": "0.0.0-alpha",
   "description": "A simple mysql wrapper for node.js",
   "main": "dist/index.js",
@@ -10,7 +10,8 @@
   "keywords": [
     "mysql",
     "mysql-wrapper",
-    "easy-mysql"
+    "easy-mysql",
+    "mysql typescript"
   ],
   "author": {
     "name": "Dev-CasperTheGhost",

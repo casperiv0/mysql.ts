@@ -13,9 +13,9 @@ export class Connection {
     this.config = config;
 
     if (typeof config !== "string") {
-      this.reconnect = config.reconnect ?? false;
+      this.reconnect = config.reconnect ?? true;
     } else {
-      this.reconnect = false;
+      this.reconnect = true;
     }
 
     // @ts-expect-error ignore
@@ -35,6 +35,38 @@ export class Connection {
 
         return this;
       });
+  }
+
+  destroy() {
+    this.connection.destroy();
+  }
+
+  end() {
+    return new Promise((resolve, reject) => {
+      return this.connection.end((err) => {
+        if (err) {
+          return reject(err);
+        }
+
+        resolve(true);
+      });
+    });
+  }
+
+  format(sql: string, values: unknown[]) {
+    return this.connection.format(sql, values);
+  }
+
+  pause() {
+    this.connection.pause();
+  }
+
+  resume() {
+    this.connection.resume();
+  }
+
+  on(eventName: string, listener: (...args: any[]) => void) {
+    this.connection.on(eventName, listener);
   }
 
   async connect(): Promise<mysql.Connection> {

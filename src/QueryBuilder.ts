@@ -11,8 +11,23 @@ export class QueryBuilder {
     this.values = [];
   }
 
-  select(selector: string) {
-    this.query += `SELECT ${selector} `;
+  /**
+   * Select 1 or more items from a table
+   * @param {string|string[]} selector
+   * @example
+   *
+   * // 1 item
+   * <Connection>.query.select("id").from("books");
+   *
+   * // multiple items
+   * <Connection>.query.select(["id", "name"]).from("books");
+   */
+  select(selector: string | string[]) {
+    if (typeof selector === "string") {
+      this.query += `SELECT ${selector} `;
+    } else {
+      this.query += `SELECT ${selector.join(", ")} `;
+    }
 
     return this;
   }
@@ -83,6 +98,24 @@ export class QueryBuilder {
     return this;
   }
 
+  order(selector: string, type: "ASC" | "DESC") {
+    this.query += `ORDER BY ${selector} ${type.toUpperCase()} `;
+
+    return this;
+  }
+
+  limit(n: number | string) {
+    this.query += `LIMIT ${n}`;
+
+    return this;
+  }
+
+  having(condition: string) {
+    this.query += `HAVING ${condition} `;
+
+    return this;
+  }
+
   raw(query: string, values: unknown[]) {
     this.query = query;
     this.values = values;
@@ -94,9 +127,6 @@ export class QueryBuilder {
    * Execute the query
    */
   async exec<T>(): Promise<T[]> {
-    console.log(this.values);
-    console.log(this.query);
-
     return new Promise((resolve, reject) => {
       this.connection.query(this.query, this.values, (err, results) => {
         if (err) {
