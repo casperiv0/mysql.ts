@@ -97,6 +97,13 @@ export class QueryBuilder {
     return this;
   }
 
+  and(selector: string, value: string) {
+    this.query += `AND ${selector} = ? `;
+    this.values.push(value);
+
+    return this;
+  }
+
   order(selector: string, type: "ASC" | "DESC") {
     this.query += `ORDER BY ${selector} ${type.toUpperCase()} `;
 
@@ -140,8 +147,11 @@ export class QueryBuilder {
   async exec<T>(): Promise<T[]> {
     return new Promise((resolve, reject) => {
       this.connection.query(this.query, this.values, (err, results) => {
+        this.query = "";
+        this.values = [];
+
         if (err) {
-          reject(err);
+          return reject(err);
         }
 
         return resolve(results);

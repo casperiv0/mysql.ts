@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.5
+
+- fix: cleanup query after `exec`
+
 ## 0.0.4
 
 - Add missing exports

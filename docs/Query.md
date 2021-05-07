@@ -90,3 +90,4 @@ const result = await connection.query.raw("SELECT * FROM `books`").where("name",
 - `having`
 - `raw`
 - `exec`
+- `and`

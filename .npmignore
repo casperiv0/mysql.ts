@@ -1,3 +1,6 @@
 tests
 src
 docs
+.eslintrc.json
+.eslintignore
+.prettierignore
