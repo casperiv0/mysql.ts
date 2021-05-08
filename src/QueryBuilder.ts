@@ -43,7 +43,7 @@ export class QueryBuilder<T = any> {
    * @param tableName The name of the table
    * @param data Data that needs to be inserted
    */
-  insert(tableName: string, data: T) {
+  insert(tableName: string, data: Partial<T>) {
     const values = Object.keys(data).map((key) => {
       return `${(data as any)[key]}`;
     });
@@ -59,7 +59,7 @@ export class QueryBuilder<T = any> {
    * @param tableName The name of the table
    * @param data Data that needs to be updated
    */
-  update(tableName: string, data: T) {
+  update(tableName: string, data: Partial<T>) {
     const values = Object.keys(data).map((key) => {
       return `${(data as any)[key]}`;
     });
@@ -161,7 +161,7 @@ export class QueryBuilder<T = any> {
     });
   }
 
-  private createKeys(data: T) {
+  private createKeys(data: Partial<T>) {
     return Object.keys(data)
       .map((key) => {
         return `\`${key}\``;
@@ -169,7 +169,7 @@ export class QueryBuilder<T = any> {
       .join(", ");
   }
 
-  private createValues(data: T) {
+  private createValues(data: Partial<T>) {
     return Object.keys(data)
       .map(() => "?")
       .join(", ");

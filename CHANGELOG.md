@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.9
+
+- Make `QueryBuilder#update` & `QueryBuilder#insert` `Partial<T>`
+
 ## 0.0.8
 
 - better TypeScript support
