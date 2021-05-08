@@ -37,10 +37,42 @@ async function init() {
 }
 ```
 
-## Example
+## TypeScript support
 
-You can [view an example here](https://github.com/Dev-CasperTheGhost/mysql.ts-example)
+```ts
+interface MyData {
+  id: string;
+  fist_name: string;
+  last_name: string;
+}
+
+const connection = await createConnection({
+  /* ... */
+});
+
+const books = await connection
+  .query<MyData>()
+  // will have types!
+  .select(["last_name", "fist_name"])
+  .from("books")
+  // will have types!
+  .where("last_name", "hello")
+  // will have types!
+  .order("last_name", "ASC")
+  .exec();
+```
+
+_This is not a full list of methods. Check the docs for a full list!_
 
 ## Documentation
 
-[You can view the documentation here](https://github.com/Dev-CasperTheGhost/mysql.ts/tree/main/docs)
+[Checkout the documentation here](./docs/README.md)
+
+## More
+
+- [Query](./Query.md)
+- [Connection](./Connection.md)
+
+## Example
+
+You view [check an example here](https://github.com/Dev-CasperTheGhost/mysql.ts-example)

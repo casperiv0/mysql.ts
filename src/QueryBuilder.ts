@@ -125,6 +125,11 @@ export class QueryBuilder<T = any> {
     return this;
   }
 
+  /**
+   * Rename a table
+   * @param oldName The old table name you want to rename
+   * @param newName The new name
+   */
   renameTable(oldName: string, newName: string) {
     this.query += `RENAME TABLE ${oldName} TO ${newName} `;
 

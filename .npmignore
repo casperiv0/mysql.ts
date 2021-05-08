@@ -4,3 +4,4 @@ docs
 .eslintrc.json
 .eslintignore
 .prettierignore
+.vscode

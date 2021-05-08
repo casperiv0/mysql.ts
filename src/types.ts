@@ -38,3 +38,7 @@ export interface ChangeUserOptions {
 }
 
 export type EventNames = "error" | "end";
+
+export type CountReturn = {
+  "COUNT(*)": number;
+};
