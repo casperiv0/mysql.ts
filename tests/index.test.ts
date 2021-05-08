@@ -14,7 +14,7 @@ async function test() {
     .select(["id"], true)
     .from("users")
     .where("id", "a7f17514-e434-4142-bc68-9360ce26df6e")
-    .or("id", "f7109fd2-6678-4e5f-b9ec-c3c84f574f72")
+    .or("id", 1)
     .exec();
 
   // const d = await conn.query().drop("books", "database").exec();

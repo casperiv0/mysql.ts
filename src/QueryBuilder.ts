@@ -1,4 +1,5 @@
 import mysql from "mysql";
+import { QueryValue } from "./types";
 
 export class QueryBuilder<T = any> {
   private connection: mysql.Connection;
@@ -7,6 +8,7 @@ export class QueryBuilder<T = any> {
 
   constructor(connection: mysql.Connection) {
     this.connection = connection;
+
     this.query = "";
     this.values = [];
   }
@@ -92,21 +94,21 @@ export class QueryBuilder<T = any> {
     return this;
   }
 
-  where(selector: keyof T, value: string) {
+  where(selector: keyof T, value: QueryValue) {
     this.query += `WHERE ${selector} = ? `;
     this.values.push(value);
 
     return this;
   }
 
-  and(selector: keyof T, value: string) {
+  and(selector: keyof T, value: QueryValue) {
     this.query += `AND ${selector} = ? `;
     this.values.push(value);
 
     return this;
   }
 
-  or(selector: keyof T, value: string) {
+  or(selector: keyof T, value: QueryValue) {
     this.query += `OR ${selector} = ? `;
     this.values.push(value);
 

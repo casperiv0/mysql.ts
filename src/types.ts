@@ -42,3 +42,5 @@ export type EventNames = "error" | "end";
 export type CountReturn = {
   "COUNT(*)": number;
 };
+
+export type QueryValue = string | boolean | number;

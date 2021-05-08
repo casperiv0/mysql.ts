@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.11
+
+- Use `string | boolean | number` instead of `string` for `and`, `or` and `where`
+
 ## 0.0.10
 
 - Add `or`, `renameTable`, `drop`, `count`, `dropColumn` methods to `QueryBuilder`

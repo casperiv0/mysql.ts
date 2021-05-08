@@ -6,6 +6,6 @@ export async function createConnection(config: ConnectionConfig): Promise<Connec
   return new Connection(config);
 }
 
-export { ConnectionConfig, StatisticsPacket, EventNames, ChangeUserOptions, CountReturn } from "./types";
+export { ConnectionConfig, StatisticsPacket, EventNames, ChangeUserOptions, CountReturn, QueryValue } from "./types";
 export { Connection, QueryBuilder };
 export { MysqlError, OkPacket, QueryOptions } from "mysql";
