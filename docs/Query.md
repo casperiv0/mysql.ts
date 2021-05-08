@@ -92,6 +92,11 @@ const result = await connection.query().raw("SELECT * FROM `books`").where("name
 - `raw`
 - `exec`
 - `and`
+- `or`
+- `renameTable`
+- `drop`
+- `count`
+- `dropColumn`
 
 ---
 

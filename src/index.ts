@@ -1,9 +1,11 @@
 import { Connection } from "./Connection";
-import { ConnectionConfig, StatisticsPacket, EventNames, ChangeUserOptions } from "./types";
+import { ConnectionConfig } from "./types";
 import { QueryBuilder } from "./QueryBuilder";
 
 export async function createConnection(config: ConnectionConfig): Promise<Connection> {
   return new Connection(config);
 }
 
-export { Connection, QueryBuilder, ConnectionConfig, StatisticsPacket, EventNames, ChangeUserOptions };
+export { ConnectionConfig, StatisticsPacket, EventNames, ChangeUserOptions } from "./types";
+export { Connection, QueryBuilder };
+export { MysqlError, OkPacket, QueryOptions } from "mysql";

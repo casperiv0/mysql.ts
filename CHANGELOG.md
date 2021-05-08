@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.0.10
+
+- Add `or`, `renameTable`, `drop`, `count`, `dropColumn` methods to `QueryBuilder`
+- Export `MysqlError`, `OkPacket`, `QueryOptions` types from `mysql`
+
 ## 0.0.9
 
 - Make `QueryBuilder#update` & `QueryBuilder#insert` `Partial<T>`

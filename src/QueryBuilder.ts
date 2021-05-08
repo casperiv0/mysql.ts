@@ -22,11 +22,13 @@ export class QueryBuilder<T = any> {
    * // multiple items
    * <Connection>.query().select(["id", "name"]).from("books");
    */
-  select(selector: keyof T | (keyof T)[] | "*") {
+  select(selector: keyof T | (keyof T)[] | "*", distinct?: boolean) {
+    const q = `SELECT ${distinct === true ? "DISTINCT" : ""}`;
+
     if (Array.isArray(selector)) {
-      this.query += `SELECT ${selector.join(", ")} `;
+      this.query += `${q} ${selector.join(", ")} `;
     } else {
-      this.query += `SELECT ${selector} `;
+      this.query += `${q} ${selector} `;
     }
 
     return this;
@@ -104,6 +106,13 @@ export class QueryBuilder<T = any> {
     return this;
   }
 
+  or(selector: keyof T, value: string) {
+    this.query += `OR ${selector} = ? `;
+    this.values.push(value);
+
+    return this;
+  }
+
   order(selector: keyof T, type: "ASC" | "DESC") {
     this.query += `ORDER BY ${selector} ${type.toUpperCase()} `;
 
@@ -112,6 +121,41 @@ export class QueryBuilder<T = any> {
 
   limit(n: number | string) {
     this.query += `LIMIT ${n}`;
+
+    return this;
+  }
+
+  renameTable(oldName: string, newName: string) {
+    this.query += `RENAME TABLE ${oldName} TO ${newName} `;
+
+    return this;
+  }
+
+  /**
+   * Drop a database or a table
+   * @param {string} name The table or database you want to drop
+   * @param {"table"|"database"} type `table` or `database`
+   * @returns
+   */
+  drop(name: string, type: "table" | "database") {
+    this.query += `DROP ${type.toUpperCase()} ${name} `;
+
+    return this;
+  }
+
+  count(selector: string) {
+    this.query += `SELECT COUNT(*) FROM ${selector}`;
+
+    return this;
+  }
+
+  /**
+   * Delete a column in a database table
+   * @param tableName The name of the table
+   * @param columnName The name of the column you want to drop
+   */
+  dropColumn(tableName: string, columnName: string) {
+    this.query += `ALTER TABLE ${tableName} DROP COLUMN ${columnName} `;
 
     return this;
   }
