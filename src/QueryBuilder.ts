@@ -192,6 +192,24 @@ export class QueryBuilder<Tables, T = any> {
     return this;
   }
 
+  createTable(
+    name: string,
+    options: Partial<Record<keyof T, string>>,
+    primary?: keyof Partial<Record<keyof T, string>>,
+  ) {
+    const primaryKey = primary ? `, PRIMARY KEY (${primary})` : "";
+
+    const values = Object.keys(options)
+      .map((value) => {
+        return `${value} ${(options as any)[value]}`;
+      })
+      .join(",\n");
+
+    this.query = `CREATE TABLE ${name} (${values} ${primaryKey}) `;
+
+    return this;
+  }
+
   /**
    * Execute the query
    */

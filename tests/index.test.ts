@@ -1,6 +1,14 @@
-import { createConnection } from "../src/index";
+// import { date, json } from "../src/BuilderTypes";
+import { createConnection, int, string } from "../src/index";
 
 type MyTables = "users" | "citizens" | "vehicles";
+
+type Book = {
+  id: string;
+  name: string;
+  isbn: number;
+  author: string;
+};
 
 async function test() {
   const conn = await createConnection<MyTables>({
@@ -12,13 +20,16 @@ async function test() {
   });
 
   const x = await conn
-    .query<{ username: string; id: string }>()
-    .select(["id"], true)
-    .from("citizens")
-    .where("id", "a7f17514-e434-4142-bc68-9360ce26df6e")
-    .or("id", 1)
+    .query<Book>()
+    .createTable(
+      "testing",
+      {
+        author: string({ nullable: false }),
+        isbn: int({ nullable: false, length: 50 }),
+      },
+      "id",
+    )
     .exec();
-
   // const d = await conn.query().drop("books", "database").exec();
 
   console.log(x);
