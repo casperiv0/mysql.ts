@@ -3,7 +3,7 @@ import { promisify } from "./promisify";
 import { QueryBuilder } from "./QueryBuilder";
 import { ChangeUserOptions, ConnectionConfig, EventNames, StatisticsPacket } from "./types";
 
-export class Connection {
+export class Connection<Tables> {
   public config: ConnectionConfig | string;
   public connection!: mysql.Connection;
   private reconnect: boolean;
@@ -80,8 +80,8 @@ export class Connection {
     return promisify.apply(this.connection, ["ping", options]);
   }
 
-  query<T = any>(): QueryBuilder<T> {
-    return new QueryBuilder<T>(this.connection);
+  query<T = any>(): QueryBuilder<Tables, T> {
+    return new QueryBuilder<Tables, T>(this.connection);
   }
 
   resume(): void {

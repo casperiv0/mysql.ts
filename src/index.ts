@@ -2,8 +2,8 @@ import { Connection } from "./Connection";
 import { ConnectionConfig } from "./types";
 import { QueryBuilder } from "./QueryBuilder";
 
-export async function createConnection(config: ConnectionConfig): Promise<Connection> {
-  return new Connection(config);
+export async function createConnection<Tables = any>(config: ConnectionConfig): Promise<Connection<Tables>> {
+  return new Connection<Tables>(config);
 }
 
 export { ConnectionConfig, StatisticsPacket, EventNames, ChangeUserOptions, CountReturn, QueryValue } from "./types";

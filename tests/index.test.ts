@@ -1,7 +1,9 @@
 import { createConnection } from "../src/index";
 
+type MyTables = "users" | "citizens" | "vehicles";
+
 async function test() {
-  const conn = await createConnection({
+  const conn = await createConnection<MyTables>({
     host: "192.168.0.140",
     user: "root",
     password: "",
@@ -12,7 +14,7 @@ async function test() {
   const x = await conn
     .query<{ username: string; id: string }>()
     .select(["id"], true)
-    .from("users")
+    .from("citizens")
     .where("id", "a7f17514-e434-4142-bc68-9360ce26df6e")
     .or("id", 1)
     .exec();

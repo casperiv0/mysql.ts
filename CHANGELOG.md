@@ -1,5 +1,36 @@
 # Changelog
 
+## 0.0.12
+
+- Support for `Tables` type.
+
+### Usage
+
+<details>
+
+<summary>View the example!</summary>
+
+```ts
+import { createConnection } from "@casper124578/mysql.ts";
+
+type MyTables = "books" | "authors";
+
+async function init() {
+  // pass it in here!
+  const connection = await createConnection<MyTables>({
+    /* options */
+  });
+
+  // Works!
+  const results = await connection.query().select("*").from("books").exec();
+
+  // Typescript error!
+  const other = await connection.query().select("*").from("nope").exec();
+}
+```
+
+</details>
+
 ## 0.0.11
 
 - Use `string | boolean | number` instead of `string` for `and`, `or` and `where`

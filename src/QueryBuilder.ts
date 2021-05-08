@@ -1,7 +1,7 @@
 import mysql from "mysql";
 import { QueryValue } from "./types";
 
-export class QueryBuilder<T = any> {
+export class QueryBuilder<Tables, T = any> {
   private connection: mysql.Connection;
   query: string;
   values: unknown[];
@@ -36,7 +36,7 @@ export class QueryBuilder<T = any> {
     return this;
   }
 
-  from(selector: string) {
+  from(selector: Tables) {
     this.query += `FROM ${selector} `;
 
     return this;
@@ -47,7 +47,7 @@ export class QueryBuilder<T = any> {
    * @param tableName The name of the table
    * @param data Data that needs to be inserted
    */
-  insert(tableName: string, data: Partial<T>) {
+  insert(tableName: Tables, data: Partial<T>) {
     const values = Object.keys(data).map((key) => {
       return `${(data as any)[key]}`;
     });
@@ -63,7 +63,7 @@ export class QueryBuilder<T = any> {
    * @param tableName The name of the table
    * @param data Data that needs to be updated
    */
-  update(tableName: string, data: Partial<T>) {
+  update(tableName: Tables, data: Partial<T>) {
     const values = Object.keys(data).map((key) => {
       return `${(data as any)[key]}`;
     });
@@ -88,7 +88,7 @@ export class QueryBuilder<T = any> {
    * // delete all items from table
    * <Connection>.query().delete("books").exec();
    */
-  delete(selector: string) {
+  delete(selector: Tables) {
     this.query = `DELETE FROM ${selector} `;
 
     return this;
@@ -132,7 +132,7 @@ export class QueryBuilder<T = any> {
    * @param oldName The old table name you want to rename
    * @param newName The new name
    */
-  renameTable(oldName: string, newName: string) {
+  renameTable(oldName: Tables, newName: string) {
     this.query += `RENAME TABLE ${oldName} TO ${newName} `;
 
     return this;
@@ -144,13 +144,13 @@ export class QueryBuilder<T = any> {
    * @param {"table"|"database"} type `table` or `database`
    * @returns
    */
-  drop(name: string, type: "table" | "database") {
+  drop(name: Tables, type: "table" | "database") {
     this.query += `DROP ${type.toUpperCase()} ${name} `;
 
     return this;
   }
 
-  count(selector: string) {
+  count(selector: Tables) {
     this.query += `SELECT COUNT(*) FROM ${selector}`;
 
     return this;
@@ -161,7 +161,7 @@ export class QueryBuilder<T = any> {
    * @param tableName The name of the table
    * @param columnName The name of the column you want to drop
    */
-  dropColumn(tableName: string, columnName: string) {
+  dropColumn(tableName: Tables, columnName: string) {
     this.query += `ALTER TABLE ${tableName} DROP COLUMN ${columnName} `;
 
     return this;
