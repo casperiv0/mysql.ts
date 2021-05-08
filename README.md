@@ -1,8 +1,9 @@
 # mysql.ts
 
-![size](https://img.shields.io/bundlephobia/min/@casper124578/mysql.ts/latest)
-![license](https://img.shields.io/github/license/dev-caspertheghost/mysql.ts)
-![maintained](https://img.shields.io/badge/maintained-yes-green)
+[![npm][npm_url_img]][npm_url]
+![size][size_url]
+![license][license_url]
+[![maintained][maintained_url]][github_url]
 
 A simple node.js MySQL wrapper made with TypeScript.
 
@@ -76,3 +77,10 @@ _This is not a full list of methods. Check the docs for a full list!_
 ## Example
 
 You view [check an example here](https://github.com/Dev-CasperTheGhost/mysql.ts-example)
+
+[size_url]: https://img.shields.io/bundlephobia/min/@casper124578/mysql.ts/latest
+[license_url]: https://img.shields.io/github/license/dev-caspertheghost/mysql.ts
+[maintained_url]: https://img.shields.io/badge/maintained-yes-green
+[npm_url]: https://npmjs.org/@casper124578/mysql.ts
+[npm_url_img]: https://img.shields.io/npm/v/@casper124578/mysql.ts
+[github_url]: https://github.com/dev-caspertheghost/mysql.ts
