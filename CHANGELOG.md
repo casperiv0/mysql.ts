@@ -1,5 +1,35 @@
 # Changelog
 
+## 0.0.13
+
+- Add `QueryBuilder#createTable` method
+- Add `string`, `int`, `text`, `timestamp`, `date`, `json` and `customType` for `QueryBuilder#createTable`
+
+<details>
+
+<summary>View the example!</summary>
+
+```ts
+import { createConnection, string, int } from "@casper124578/mysql.ts";
+
+async function init() {
+  const connection = await createConnection({
+    /* options */
+  });
+
+  const results = await connection
+    .query()
+    .createTable("books", "id", {
+      id: string({ nullable: false }),
+      author: string({ nullable: false }),
+      isbn: int({ nullable: false, length: 50 }),
+    })
+    .exec();
+}
+```
+
+</details>
+
 ## 0.0.12
 
 - Support for `Tables` type.

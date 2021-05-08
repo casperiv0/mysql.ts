@@ -21,14 +21,11 @@ async function test() {
 
   const x = await conn
     .query<Book>()
-    .createTable(
-      "testing",
-      {
-        author: string({ nullable: false }),
-        isbn: int({ nullable: false, length: 50 }),
-      },
-      "id",
-    )
+    .createTable("testing", "id", {
+      id: string({ nullable: false }),
+      author: string({ nullable: false }),
+      isbn: int({ nullable: false, length: 50 }),
+    })
     .exec();
   // const d = await conn.query().drop("books", "database").exec();
 

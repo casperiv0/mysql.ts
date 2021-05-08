@@ -14,6 +14,7 @@
 - [`limit`](#limit)
 - [`raw`](#raw)
 - [`renameTable`](#rename-table)
+- [`createTable`](#create-table)
 - [`drop`](#drop)
 - [`dropColumn`](#drop-column)
 - [`count`](#count)
@@ -202,6 +203,31 @@ const results = await connection.query().renameTable("books", "cool-books").exec
 
 [Back to top](#methods)
 
+## Create table
+
+Create a table
+
+```ts
+import { createConnection, string, text, int } from "@casper124578/mysql.ts"
+
+const connection = await createConnection({
+  /* ... */
+});
+
+// 0th arg = table name
+// 1st arg = primary key
+// 2nd arg = columns
+const results = await connection.query().createTable("books", "id"  {
+  id: int({ nullable: false }),
+  name: string({ nullable: false, length: 150 }),
+  description: text({ nullable: true }),
+}).exec();
+```
+
+[Full list of types](./BuilderTypes)
+
+[Back to top](#methods)
+
 ## Drop
 
 Drop a table or database
@@ -212,7 +238,7 @@ const connection = await createConnection({
 });
 
 // Oth arg = table or database name
-// 1th arg = "table" or "database"
+// 1st arg = "table" or "database"
 const results = await connection.query().drop("books", "database").exec();
 ```
 

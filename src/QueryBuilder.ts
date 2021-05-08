@@ -192,16 +192,31 @@ export class QueryBuilder<Tables, T = any> {
     return this;
   }
 
+  /**
+   * Create a table
+   * @param name The name of the table
+   * @param primary The primary key
+   * @param columns The columns that need to be inserted
+   * @example
+   *
+   * import { string, int } from "@casper124578/mysql.ts"
+   *
+   * <Connection>.query().createTable("books", "id", {
+      id: string({ nullable: false }),
+      author: string({ nullable: false }),
+      isbn: int({ nullable: false, length: 50 }),
+    })
+   */
   createTable(
     name: string,
-    options: Partial<Record<keyof T, string>>,
-    primary?: keyof Partial<Record<keyof T, string>>,
+    primary: keyof Partial<Record<keyof T, string>> | undefined,
+    columns: Partial<Record<keyof T, string>>,
   ) {
     const primaryKey = primary ? `, PRIMARY KEY (${primary})` : "";
 
-    const values = Object.keys(options)
+    const values = Object.keys(columns)
       .map((value) => {
-        return `${value} ${(options as any)[value]}`;
+        return `${value} ${(columns as any)[value]}`;
       })
       .join(",\n");
 

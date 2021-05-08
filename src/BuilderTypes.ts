@@ -26,6 +26,14 @@ export function json({ nullable = true, DEFAULT = {} }: Omit<BuilderTypeOptions<
   return `JSON ${_returnNullable(nullable)} ${_returnDefault(DEFAULT)}`;
 }
 
+export function timestamp({ nullable = true, DEFAULT }: Omit<BuilderTypeOptions, "length">) {
+  return `TIMESTAMP ${_returnNullable(nullable)} ${_returnDefault(DEFAULT)}`;
+}
+
+export function customType<T = string>(type: string, { nullable = true, DEFAULT }: BuilderTypeOptions<T>) {
+  return `${type} ${_returnNullable(nullable)} ${_returnDefault(DEFAULT as any)}`;
+}
+
 function _returnNullable(nullable: boolean | undefined) {
   return nullable === false ? "NOT NULL" : "";
 }

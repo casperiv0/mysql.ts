@@ -1,6 +1,7 @@
 # Documentation
 
 - [Query](./Query.md)
+- [Builder Types](./BuilderTypes.md)
 - [Connection](./Connection.md)
 
 ## Example
