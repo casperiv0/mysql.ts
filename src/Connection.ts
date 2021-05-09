@@ -7,6 +7,7 @@ export class Connection<Tables> {
   public config: ConnectionConfig | string;
   public connection!: mysql.Connection;
   private reconnect: boolean;
+  private debug: boolean;
 
   constructor(config: ConnectionConfig | string = {}) {
     let _connection: mysql.Connection;
@@ -14,26 +15,22 @@ export class Connection<Tables> {
 
     if (typeof config !== "string") {
       this.reconnect = config.reconnect ?? true;
+      this.debug = config.debugExec ?? false;
     } else {
+      this.debug = false;
       this.reconnect = true;
     }
 
     // @ts-expect-error ignore
-    return Promise.resolve(mysql)
-      .then(async () => {
-        if (_connection && this.reconnect) {
-          this.addReconnectHandler(_connection);
-        } else if (!_connection) {
-          _connection = await this.connect();
-        }
+    return Promise.resolve(this).then(async () => {
+      if (_connection && this.reconnect) {
+        this.addReconnectHandler(_connection);
+      } else if (!_connection) {
+        _connection = await this.connect();
+      }
 
-        return _connection;
-      })
-      .then((connection) => {
-        this.connection = connection;
-
-        return this;
-      });
+      return this;
+    });
   }
 
   get state(): string {
@@ -81,7 +78,7 @@ export class Connection<Tables> {
   }
 
   query<T = any>(): QueryBuilder<Tables, T> {
-    return new QueryBuilder<Tables, T>(this.connection);
+    return new QueryBuilder<Tables, T>(this.connection, this.debug);
   }
 
   resume(): void {
@@ -109,6 +106,7 @@ export class Connection<Tables> {
           this.addReconnectHandler(connection);
         }
 
+        this.connection = connection;
         return resolve(connection);
       });
     });

@@ -16,6 +16,7 @@
 - [`raw`](#raw)
 - [`renameTable`](#rename-table)
 - [`createTable`](#create-table)
+- `createTableIfNotExists`
 - [`addColumnsToTable`](#add-columns-to-table)
 - [`drop`](#drop)
 - [`dropColumn`](#drop-column)
@@ -276,7 +277,8 @@ const connection = await createConnection({
 
 // Oth arg = table or database name
 // 1st arg = "table" or "database"
-const results = await connection.query().drop("books", "database").exec();
+// 2nd arg = ifExists: boolean
+const results = await connection.query().drop("books", "database", true).exec();
 ```
 
 [Back to top](#methods)

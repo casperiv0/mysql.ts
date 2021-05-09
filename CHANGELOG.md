@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.0.15
+
+- Add `debugExec` to debug the `QueryBuilder#exec` method
+- Add `QueryBuilder#createTableIfNotExists` method
+- Add `ifExists` option to [`QueryBuilder#drop`](https://github.com/Dev-CasperTheGhost/mysql.ts/blob/main/docs/Query.md#drop) method
+
 ## 0.0.14
 
 - Add [`QueryBuilder#whereLike`](https://github.com/Dev-CasperTheGhost/mysql.ts/blob/main/docs/Query.md#where-like) method

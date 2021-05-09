@@ -3,11 +3,16 @@ import { QueryValue } from "./types";
 
 export class QueryBuilder<Tables, T = any> {
   private connection: mysql.Connection;
+  private debug!: boolean;
   query: string;
   values: unknown[];
 
-  constructor(connection: mysql.Connection) {
+  constructor(connection: mysql.Connection, debug?: boolean) {
     this.connection = connection;
+
+    if (debug) {
+      this.debug = debug;
+    }
 
     this.query = "";
     this.values = [];
@@ -149,10 +154,11 @@ export class QueryBuilder<Tables, T = any> {
    * Drop a database or a table
    * @param {string} name The table or database you want to drop
    * @param {"table"|"database"} type `table` or `database`
+   * @param {boolean} ifExists Check if the table/database exists when dropping
    * @returns
    */
-  drop(name: Tables, type: "table" | "database") {
-    this.query += `DROP ${type.toUpperCase()} ${name} `;
+  drop(name: Tables, type: "table" | "database", ifExists?: boolean) {
+    this.query += `DROP ${type.toUpperCase()} ${ifExists ? "IF EXISTS" : ""} ${name} `;
 
     return this;
   }
@@ -216,14 +222,18 @@ export class QueryBuilder<Tables, T = any> {
    */
   createTable(name: string, primary: keyof T | undefined, columns: Partial<Record<keyof T, string>>) {
     const primaryKey = primary ? `, PRIMARY KEY (${primary})` : "";
-
-    const values = Object.keys(columns)
-      .map((value) => {
-        return `${value} ${(columns as any)[value]}`;
-      })
-      .join(",\n");
+    const values = this.createTableValues(columns);
 
     this.query = `CREATE TABLE ${name} (${values} ${primaryKey}) `;
+
+    return this;
+  }
+
+  createTableIfNotExists(name: string, primary: keyof T | undefined, columns: Partial<Record<keyof T, string>>) {
+    const primaryKey = primary ? `, PRIMARY KEY (${primary})` : "";
+    const values = this.createTableValues(columns);
+
+    this.query = `CREATE TABLE IF NOT EXISTS ${name} (${values} ${primaryKey}) `;
 
     return this;
   }
@@ -256,6 +266,11 @@ export class QueryBuilder<Tables, T = any> {
    * Execute the query
    */
   async exec(options?: Omit<mysql.QueryOptions, "sql" | "values">): Promise<T[]> {
+    if (this.debug === true) {
+      console.info(`[mysql.ts]: Query: ${this.query}`);
+      console.info("[mysql.ts]: Values: ", this.values);
+    }
+
     return new Promise((resolve, reject) => {
       const opts = options ? { ...options, sql: this.query, values: this.values } : this.query;
 
@@ -270,6 +285,14 @@ export class QueryBuilder<Tables, T = any> {
         return resolve(results);
       });
     });
+  }
+
+  private createTableValues(columns: Partial<Record<keyof T, string>>) {
+    return Object.keys(columns)
+      .map((value) => {
+        return `${value} ${(columns as any)[value]}`;
+      })
+      .join(",\n");
   }
 
   private createKeys(data: Partial<T>) {

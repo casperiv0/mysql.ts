@@ -2,6 +2,11 @@ import { ConnectionConfig as MySQLConnectionConfig } from "mysql";
 
 export interface ConnectionConfig extends MySQLConnectionConfig {
   reconnect?: boolean;
+
+  /**
+   * This will show the full query & values when a query is executed with the `QueryBuilder#exec` method
+   */
+  debugExec?: boolean;
 }
 
 export interface StatisticsPacket {
