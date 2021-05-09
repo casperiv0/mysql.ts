@@ -6,6 +6,15 @@ export async function createConnection<Tables = any>(config: ConnectionConfig): 
   return new Connection<Tables>(config);
 }
 
-export { ConnectionConfig, StatisticsPacket, EventNames, ChangeUserOptions, CountReturn, QueryValue } from "./types";
+export { string, text, int, json, date, timestamp, customType } from "./BuilderTypes";
+export {
+  ConnectionConfig,
+  StatisticsPacket,
+  EventNames,
+  ChangeUserOptions,
+  CountReturn,
+  QueryValue,
+  BuilderTypeOptions,
+} from "./types";
 export { Connection, QueryBuilder };
 export { MysqlError, OkPacket, QueryOptions } from "mysql";

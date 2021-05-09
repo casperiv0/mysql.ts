@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.0.13
+
+- Add `QueryBuilder#createTable` and `QueryBuilder#addColumnsToTable` methods
+- Add `string`, `int`, `text`, `timestamp`, `date`, `json` and `customType` for `QueryBuilder#createTable`
+- Update documentation
+
+[See documentation for new methods](https://github.com/Dev-CasperTheGhost/mysql.ts/blob/main/docs/Query.md#create-table)
+
 ## 0.0.12
 
 - Support for `Tables` type.

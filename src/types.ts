@@ -44,3 +44,9 @@ export type CountReturn = {
 };
 
 export type QueryValue = string | boolean | number;
+
+export interface BuilderTypeOptions<DefaultType = string> {
+  nullable?: boolean;
+  length?: number;
+  DEFAULT?: DefaultType;
+}

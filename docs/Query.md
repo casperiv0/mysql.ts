@@ -14,6 +14,8 @@
 - [`limit`](#limit)
 - [`raw`](#raw)
 - [`renameTable`](#rename-table)
+- [`createTable`](#create-table)
+- [`addColumnsToTable`](#add-columns-to-table)
 - [`drop`](#drop)
 - [`dropColumn`](#drop-column)
 - [`count`](#count)
@@ -202,6 +204,54 @@ const results = await connection.query().renameTable("books", "cool-books").exec
 
 [Back to top](#methods)
 
+## Create table
+
+Create a table
+
+```ts
+import { createConnection, string, text, int } from "@casper124578/mysql.ts"
+
+const connection = await createConnection({
+  /* ... */
+});
+
+// 0th arg = table name
+// 1st arg = primary key
+// 2nd arg = columns
+const results = await connection.query().createTable("books", "id"  {
+  id: int({ nullable: false }),
+  name: string({ nullable: false, length: 150 }),
+  description: text({ nullable: true }),
+}).exec();
+```
+
+[Full list of types](./BuilderTypes.md)
+
+[Back to top](#methods)
+
+## Add columns to table
+
+```ts
+import { createConnection, int } from "@casper124578/mysql.ts";
+
+const connection = await createConnection({
+  /* ... */
+});
+
+// 0th arg = table name
+// 1st arg = columns
+const results = await connection
+  .query()
+  .addColumnsToTable("books", {
+    rating: int({ nullable: false, DEFAULT: "0" }),
+  })
+  .exec();
+```
+
+[Full list of types](./BuilderTypes.md)
+
+[Back to top](#methods)
+
 ## Drop
 
 Drop a table or database
@@ -212,7 +262,7 @@ const connection = await createConnection({
 });
 
 // Oth arg = table or database name
-// 1th arg = "table" or "database"
+// 1st arg = "table" or "database"
 const results = await connection.query().drop("books", "database").exec();
 ```
 
@@ -235,8 +285,6 @@ const results = await connection.query().dropColumn("books", "authors").exec();
 [Back to top](#methods)
 
 ## Count
-
-Drop a table or database
 
 ```ts
 const connection = await createConnection({

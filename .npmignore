@@ -5,3 +5,4 @@ docs
 .eslintignore
 .prettierignore
 .vscode
+.github
