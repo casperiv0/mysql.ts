@@ -8,6 +8,7 @@
 - [`update`](#update)
 - [`delete`](#delete)
 - [`where`](#where)
+- [`whereLike`](#where-like)
 - [`and`](#and)
 - [`or`](#or)
 - [`order`](#order)
@@ -104,6 +105,18 @@ const connection = await createConnection({
 });
 
 const result = await connection.query().select("*").from("books").where("id", "0").exec();
+```
+
+[Back to top](#methods)
+
+## Where Like
+
+```ts
+const connection = await createConnection({
+  /* ... */
+});
+
+const result = await connection.query().select("*").from("books").whereLike("name", "%cool%").exec();
 ```
 
 [Back to top](#methods)

@@ -101,6 +101,13 @@ export class QueryBuilder<Tables, T = any> {
     return this;
   }
 
+  whereLike(selector: keyof T, value: QueryValue) {
+    this.query += `WHERE ${selector} LIKE ?`;
+    this.values.push(value);
+
+    return this;
+  }
+
   and(selector: keyof T, value: QueryValue) {
     this.query += `AND ${selector} = ? `;
     this.values.push(value);

@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.14
+
+- Add [`QueryBuilder#whereLike`](https://github.com/Dev-CasperTheGhost/mysql.ts/blob/main/docs/Query.md#where-like) method
+
 ## 0.0.13
 
 - Add `QueryBuilder#createTable` and `QueryBuilder#addColumnsToTable` methods
