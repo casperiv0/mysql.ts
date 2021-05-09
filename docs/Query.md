@@ -15,6 +15,7 @@
 - [`raw`](#raw)
 - [`renameTable`](#rename-table)
 - [`createTable`](#create-table)
+- [`addColumnsToTable`](#add-columns-to-table)
 - [`drop`](#drop)
 - [`dropColumn`](#drop-column)
 - [`count`](#count)
@@ -224,7 +225,30 @@ const results = await connection.query().createTable("books", "id"  {
 }).exec();
 ```
 
-[Full list of types](./BuilderTypes)
+[Full list of types](./BuilderTypes.md)
+
+[Back to top](#methods)
+
+## Add columns to table
+
+```ts
+import { createConnection, int } from "@casper124578/mysql.ts";
+
+const connection = await createConnection({
+  /* ... */
+});
+
+// 0th arg = table name
+// 1st arg = columns
+const results = await connection
+  .query()
+  .addColumnsToTable("books", {
+    rating: int({ nullable: false, DEFAULT: "0" }),
+  })
+  .exec();
+```
+
+[Full list of types](./BuilderTypes.md)
 
 [Back to top](#methods)
 
@@ -261,8 +285,6 @@ const results = await connection.query().dropColumn("books", "authors").exec();
 [Back to top](#methods)
 
 ## Count
-
-Drop a table or database
 
 ```ts
 const connection = await createConnection({

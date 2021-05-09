@@ -1,5 +1,4 @@
-// import { date, json } from "../src/BuilderTypes";
-import { createConnection, int, string } from "../src/index";
+import { createConnection, int } from "../src/index";
 
 type MyTables = "users" | "citizens" | "vehicles";
 
@@ -21,10 +20,8 @@ async function test() {
 
   const x = await conn
     .query<Book>()
-    .createTable("testing", "id", {
-      id: string({ nullable: false }),
-      author: string({ nullable: false }),
-      isbn: int({ nullable: false, length: 50 }),
+    .addColumnsToTable("citizens", {
+      test: int({ nullable: true }),
     })
     .exec();
   // const d = await conn.query().drop("books", "database").exec();

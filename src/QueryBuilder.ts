@@ -205,13 +205,9 @@ export class QueryBuilder<Tables, T = any> {
       id: string({ nullable: false }),
       author: string({ nullable: false }),
       isbn: int({ nullable: false, length: 50 }),
-    })
+    }).exec()
    */
-  createTable(
-    name: string,
-    primary: keyof Partial<Record<keyof T, string>> | undefined,
-    columns: Partial<Record<keyof T, string>>,
-  ) {
+  createTable(name: string, primary: keyof T | undefined, columns: Partial<Record<keyof T, string>>) {
     const primaryKey = primary ? `, PRIMARY KEY (${primary})` : "";
 
     const values = Object.keys(columns)
@@ -221,6 +217,30 @@ export class QueryBuilder<Tables, T = any> {
       .join(",\n");
 
     this.query = `CREATE TABLE ${name} (${values} ${primaryKey}) `;
+
+    return this;
+  }
+
+  /**
+   * Add more columns to a table
+   * @param name The name of the table
+   * @param columns The columns to add
+   * @example
+   *
+   * import { text } from "@casper124578/mysql.ts"
+   *
+   * <Connection>.query().addColumnsToTable("books", {
+   *   description: text({ nullable: false })
+   * }).exec()
+   */
+  addColumnsToTable(name: Tables, columns: { [key: string]: string }) {
+    const values = Object.keys(columns)
+      .map((value) => {
+        return `${value} ${(columns as any)[value]}`;
+      })
+      .join(",");
+
+    this.query = `ALTER TABLE ${name} ADD ${values}`;
 
     return this;
   }
