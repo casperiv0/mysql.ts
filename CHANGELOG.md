@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.0.16
+
+- add `QueryBuilder#resetQuery` method
+- throw error when no query string is present
+- bump dependencies
+
 ## 0.0.15
 
 - Add `debugExec` to debug the `QueryBuilder#exec` method

@@ -262,6 +262,13 @@ export class QueryBuilder<Tables, T = any> {
     return this;
   }
 
+  resetQuery() {
+    this.query = "";
+    this.values = [];
+
+    return this;
+  }
+
   /**
    * Execute the query
    */
@@ -269,6 +276,10 @@ export class QueryBuilder<Tables, T = any> {
     if (this.debug === true) {
       console.info(`[mysql.ts]: Query: ${this.query}`);
       console.info("[mysql.ts]: Values: ", this.values);
+    }
+
+    if (!this.query) {
+      throw new Error("[mysql.ts]: Cannot execute a query without a query string.");
     }
 
     return new Promise((resolve, reject) => {

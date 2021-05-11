@@ -21,6 +21,7 @@
 - [`drop`](#drop)
 - [`dropColumn`](#drop-column)
 - [`count`](#count)
+- [`resetQuery`](#reset-query)
 - [`exec`](#exec)
 - `having`
 
@@ -308,6 +309,32 @@ const connection = await createConnection({
 
 const results = await connection.query().count("books").exec();
 //=> { "COUNT(*)": <number> }
+```
+
+[Back to top](#methods)
+
+## Reset query
+
+reset the query string and values
+
+```ts
+const connection = await createConnection({
+  /* ... */
+});
+
+const query = connection.query().select("*").from("books");
+
+if (something) {
+  query.resetQuery();
+
+  console.log(query.query);
+  //=> ""
+
+  console.log(query.values);
+  //=> []
+}
+
+/* ... */
 ```
 
 [Back to top](#methods)
