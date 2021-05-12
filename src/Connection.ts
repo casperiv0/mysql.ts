@@ -7,7 +7,6 @@ export class Connection<Tables> {
   public config: ConnectionConfig | string;
   public connection!: mysql.Connection;
   private reconnect: boolean;
-  private debug: boolean;
 
   constructor(config: ConnectionConfig | string = {}) {
     let _connection: mysql.Connection;
@@ -15,9 +14,7 @@ export class Connection<Tables> {
 
     if (typeof config !== "string") {
       this.reconnect = config.reconnect ?? true;
-      this.debug = config.debugExec ?? false;
     } else {
-      this.debug = false;
       this.reconnect = true;
     }
 
@@ -78,7 +75,7 @@ export class Connection<Tables> {
   }
 
   query<T = any>(): QueryBuilder<Tables, T> {
-    return new QueryBuilder<Tables, T>(this.connection, this.debug);
+    return new QueryBuilder<Tables, T>(this.connection, this.config);
   }
 
   resume(): void {

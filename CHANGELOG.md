@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.0.17
+
+- Add `returnEmptyArrayForNoResults` to `ConnectionConfig`
+- Minor code improvements
+
 ## 0.0.16
 
 - add `QueryBuilder#resetQuery` method

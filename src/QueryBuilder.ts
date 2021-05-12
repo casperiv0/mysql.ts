@@ -1,17 +1,17 @@
 import mysql from "mysql";
-import { QueryValue } from "./types";
+import { ConnectionConfig, QueryValue } from "./types";
 
 export class QueryBuilder<Tables, T = any> {
   private connection: mysql.Connection;
-  private debug!: boolean;
+  private config!: ConnectionConfig;
   query: string;
   values: unknown[];
 
-  constructor(connection: mysql.Connection, debug?: boolean) {
+  constructor(connection: mysql.Connection, config?: string | ConnectionConfig) {
     this.connection = connection;
 
-    if (debug) {
-      this.debug = debug;
+    if (config && typeof config === "object") {
+      this.config = config;
     }
 
     this.query = "";
@@ -58,7 +58,7 @@ export class QueryBuilder<Tables, T = any> {
     });
 
     this.query += `INSERT INTO ${tableName} (${this.createKeys(data)}) VALUES (${this.createValues(data)}) `;
-    this.values = [...this.values, ...values];
+    this.values.push(...values);
 
     return this;
   }
@@ -78,7 +78,7 @@ export class QueryBuilder<Tables, T = any> {
     });
 
     this.query += `UPDATE ${tableName} SET ${keys} `;
-    this.values = [...this.values, ...values];
+    this.values.push(...values);
 
     return this;
   }
@@ -272,8 +272,8 @@ export class QueryBuilder<Tables, T = any> {
   /**
    * Execute the query
    */
-  async exec(options?: Omit<mysql.QueryOptions, "sql" | "values">): Promise<T[]> {
-    if (this.debug === true) {
+  async exec(options?: Omit<mysql.QueryOptions, "sql" | "values">): Promise<T[] | undefined> {
+    if (this.config.debugExec === true) {
       console.info(`[mysql.ts]: Query: ${this.query}`);
       console.info("[mysql.ts]: Values: ", this.values);
     }
@@ -286,14 +286,19 @@ export class QueryBuilder<Tables, T = any> {
       const opts = options ? { ...options, sql: this.query, values: this.values } : this.query;
 
       this.connection.query(opts, this.values, (err, results) => {
-        this.query = "";
-        this.values = [];
+        this.resetQuery();
 
         if (err) {
           return reject(err);
         }
 
-        return resolve(results);
+        if (this.config.returnEmptyArrayForNoResults) {
+          return resolve(results);
+        } else {
+          if (results.length <= 0) {
+            return resolve(undefined);
+          }
+        }
       });
     });
   }
