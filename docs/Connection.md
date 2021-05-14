@@ -1,5 +1,20 @@
 # Connection
 
+## Usage
+
+```ts
+import { createConnection } from "@casper124578/mysql.ts";
+
+async function init() {
+  const connection = await createConnection({
+    /* options */
+    /* see: https://github.com/mysqljs/mysql#connection-options */
+  });
+
+  console.log(connection);
+}
+```
+
 ## Methods
 
 - [beginTransaction](https://github.com/mysqljs/mysql#transactions)

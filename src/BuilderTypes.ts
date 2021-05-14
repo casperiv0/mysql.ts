@@ -14,22 +14,37 @@ export function int({ nullable = true, length = 8, DEFAULT }: BuilderTypeOptions
   return `int(${length}) ${_returnNullable(nullable)} ${_returnDefault(DEFAULT)}`;
 }
 
-export function text({ nullable, DEFAULT }: Omit<BuilderTypeOptions, "length">): string {
+/**
+ * Defaults: `nullable = true`
+ */
+export function text({ nullable = true, DEFAULT }: Omit<BuilderTypeOptions, "length">): string {
   return `text ${_returnNullable(nullable)} ${_returnDefault(DEFAULT)}`;
 }
 
+/**
+ * Defaults: `nullable = true`
+ */
 export function date({ nullable = true, DEFAULT }: Omit<BuilderTypeOptions, "length">) {
   return `DATE ${_returnNullable(nullable)} ${_returnDefault(DEFAULT)}`;
 }
 
+/**
+ * Defaults: `nullable = true`, `DEFAULT = {}`
+ */
 export function json({ nullable = true, DEFAULT = {} }: Omit<BuilderTypeOptions<any>, "length">) {
   return `JSON ${_returnNullable(nullable)} ${_returnDefault(DEFAULT)}`;
 }
 
+/**
+ * Defaults: `nullable = true`
+ */
 export function timestamp({ nullable = true, DEFAULT }: Omit<BuilderTypeOptions, "length">) {
   return `TIMESTAMP ${_returnNullable(nullable)} ${_returnDefault(DEFAULT)}`;
 }
 
+/**
+ * @see [https://github.com/Dev-CasperTheGhost/mysql.ts/blob/main/docs/BuilderTypes.md#customtype](https://github.com/Dev-CasperTheGhost/mysql.ts/blob/main/docs/BuilderTypes.md#customtype)
+ */
 export function customType<T = string>(type: string, { nullable = true, DEFAULT }: BuilderTypeOptions<T>) {
   return `${type} ${_returnNullable(nullable)} ${_returnDefault(DEFAULT as any)}`;
 }

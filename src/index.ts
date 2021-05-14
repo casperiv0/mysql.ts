@@ -2,6 +2,12 @@ import { Connection } from "./Connection";
 import { ConnectionConfig } from "./types";
 import { QueryBuilder } from "./QueryBuilder";
 
+/**
+ * Create the connection to the database
+ * @param {ConnectionConfig} config The connection config
+ * @see [https://github.com/mysqljs/mysql#connection-options](https://github.com/mysqljs/mysql#connection-options)
+ * @returns The connection
+ */
 export async function createConnection<Tables = any>(config: ConnectionConfig): Promise<Connection<Tables>> {
   return new Connection<Tables>(config);
 }

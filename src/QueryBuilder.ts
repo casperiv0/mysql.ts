@@ -229,6 +229,10 @@ export class QueryBuilder<Tables, T = any> {
     return this;
   }
 
+  /**
+   * Same as `QueryBuilder#createTable` but only create the table if it doesn't exist
+   * @see [https://github.com/Dev-CasperTheGhost/mysql.ts/blob/main/docs/Query.md#create-table](https://github.com/Dev-CasperTheGhost/mysql.ts/blob/main/docs/Query.md#create-table)
+   */
   createTableIfNotExists(name: string, primary: keyof T | undefined, columns: Partial<Record<keyof T, string>>) {
     const primaryKey = primary ? `, PRIMARY KEY (${primary})` : "";
     const values = this.createTableValues(columns);
@@ -262,6 +266,9 @@ export class QueryBuilder<Tables, T = any> {
     return this;
   }
 
+  /**
+   * Reset the query string and values
+   */
   resetQuery() {
     this.query = "";
     this.values = [];

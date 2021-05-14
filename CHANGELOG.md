@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.18
+
+- Update docs
+
 ## 0.0.17
 
 - Add `returnEmptyArrayForNoResults` to `ConnectionConfig`
