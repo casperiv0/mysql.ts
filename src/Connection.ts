@@ -94,7 +94,7 @@ export class Connection<Tables> {
     const connection = mysql.createConnection(this.config);
 
     return new Promise((resolve, reject) => {
-      return connection.connect(async (err) => {
+      connection.connect(async (err) => {
         if (err) {
           return reject(err);
         }

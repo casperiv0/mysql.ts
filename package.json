@@ -1,6 +1,6 @@
 {
   "name": "@casper124578/mysql.ts",
-  "version": "0.0.18",
+  "version": "0.0.19",
   "description": "A simple mysql wrapper for node.js",
   "main": "dist/index.js",
   "private": false,
@@ -9,6 +9,7 @@
     "build:tsc": "tsc --noEmit",
     "test": "ts-node tests/index.test.ts",
     "lint": "eslint . --ext .ts,.tsx",
+    "lint:fix": "eslint . --fix --ext .ts,.tsx",
     "format": "prettier --write \"**/*.{js,jsx,json,ts,tsx,yml,md}\" --ignore-path .gitignore"
   },
   "keywords": [
@@ -34,6 +35,7 @@
     "mysql": "^2.18.1"
   },
   "devDependencies": {
+    "@casper124578/eslint-config": "^0.0.3",
     "@types/mysql": "^2.15.18",
     "@typescript-eslint/eslint-plugin": "^4.23.0",
     "@typescript-eslint/parser": "^4.23.0",

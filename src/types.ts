@@ -4,12 +4,12 @@ export interface ConnectionConfig extends MySQLConnectionConfig {
   reconnect?: boolean;
 
   /**
-   * This will show the full query & values when a query is executed with the `QueryBuilder#exec` method
+   * this will show the full query & values when a query is executed with the `QueryBuilder#exec` method
    */
   debugExec?: boolean;
 
   /**
-   * When no results are found for a query:
+   * when no results are found for a query:
    *
    * `false` = return `undefined`
    *
@@ -33,22 +33,22 @@ export interface StatisticsPacket {
 
 export interface ChangeUserOptions {
   /**
-   * The name of the new user (defaults to the previous one)
+   * the name of the new user (defaults to the previous one)
    */
   user?: string;
 
   /**
-   * The password of the new user (defaults to the previous one)
+   * the password of the new user (defaults to the previous one)
    */
   password?: string;
 
   /**
-   * The new charset (defaults to the previous one)
+   * the new charset (defaults to the previous one)
    */
   charset?: string;
 
   /**
-   * The new database (defaults to the previous one)
+   * the new database (defaults to the previous one)
    */
   database?: string;
 }

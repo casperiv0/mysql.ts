@@ -19,7 +19,7 @@ export class QueryBuilder<Tables, T = any> {
   }
 
   /**
-   * Select 1 or more items from a table
+   * select 1 or more items from a table
    * @param {string|string[]} selector
    * @example
    *
@@ -48,7 +48,7 @@ export class QueryBuilder<Tables, T = any> {
   }
 
   /**
-   * Insert data into a table
+   * insert data into a table
    * @param tableName The name of the table
    * @param data Data that needs to be inserted
    */
@@ -64,7 +64,7 @@ export class QueryBuilder<Tables, T = any> {
   }
 
   /**
-   * Update data from a table
+   * update data from a table
    * @param tableName The name of the table
    * @param data Data that needs to be updated
    */
@@ -84,7 +84,7 @@ export class QueryBuilder<Tables, T = any> {
   }
 
   /**
-   * Delete something from the table
+   * delete something from the table
    * @param selector The table name
    * @example
    * // delete an item with 'where'
@@ -140,7 +140,7 @@ export class QueryBuilder<Tables, T = any> {
   }
 
   /**
-   * Rename a table
+   * rename a table
    * @param oldName The old table name you want to rename
    * @param newName The new name
    */
@@ -151,7 +151,7 @@ export class QueryBuilder<Tables, T = any> {
   }
 
   /**
-   * Drop a database or a table
+   * drop a database or a table
    * @param {string} name The table or database you want to drop
    * @param {"table"|"database"} type `table` or `database`
    * @param {boolean} ifExists Check if the table/database exists when dropping
@@ -170,7 +170,7 @@ export class QueryBuilder<Tables, T = any> {
   }
 
   /**
-   * Delete a column in a database table
+   * delete a column in a database table
    * @param tableName The name of the table
    * @param columnName The name of the column you want to drop
    */
@@ -187,7 +187,7 @@ export class QueryBuilder<Tables, T = any> {
   }
 
   /**
-   * Create a raw query
+   * create a raw query
    * @param query The raw query
    * @param values Values that are needed for insert, update, ..
    * @example
@@ -206,7 +206,7 @@ export class QueryBuilder<Tables, T = any> {
   }
 
   /**
-   * Create a table
+   * create a table
    * @param name The name of the table
    * @param primary The primary key
    * @param columns The columns that need to be inserted
@@ -230,7 +230,7 @@ export class QueryBuilder<Tables, T = any> {
   }
 
   /**
-   * Same as `QueryBuilder#createTable` but only create the table if it doesn't exist
+   * same as `QueryBuilder#createTable` but only create the table if it doesn't exist
    * @see [https://github.com/Dev-CasperTheGhost/mysql.ts/blob/main/docs/Query.md#create-table](https://github.com/Dev-CasperTheGhost/mysql.ts/blob/main/docs/Query.md#create-table)
    */
   createTableIfNotExists(name: string, primary: keyof T | undefined, columns: Partial<Record<keyof T, string>>) {
@@ -243,7 +243,7 @@ export class QueryBuilder<Tables, T = any> {
   }
 
   /**
-   * Add more columns to a table
+   * add more columns to a table
    * @param name The name of the table
    * @param columns The columns to add
    * @example
@@ -267,7 +267,7 @@ export class QueryBuilder<Tables, T = any> {
   }
 
   /**
-   * Reset the query string and values
+   * reset the query string and values
    */
   resetQuery() {
     this.query = "";
@@ -277,7 +277,7 @@ export class QueryBuilder<Tables, T = any> {
   }
 
   /**
-   * Execute the query
+   * execute the query
    */
   async exec(options?: Omit<mysql.QueryOptions, "sql" | "values">): Promise<T[] | undefined> {
     if (this.config.debugExec === true) {
