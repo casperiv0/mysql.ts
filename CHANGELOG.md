@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.20
+
+- Make [`BuilderTypes`](https://github.com/Dev-CasperTheGhost/mysql.ts/blob/main/docs/BuilderTypes.md) options optional
+
 ## 0.0.19
 
 - Add [custom ESLint config](https://github.com/dev-caspertheghost/eslint-config)

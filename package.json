@@ -1,6 +1,6 @@
 {
   "name": "@casper124578/mysql.ts",
-  "version": "0.0.19",
+  "version": "0.0.20",
   "description": "A simple mysql wrapper for node.js",
   "main": "dist/index.js",
   "private": false,
