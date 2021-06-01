@@ -17,10 +17,14 @@ async function test() {
     database: "snaily-cad",
     reconnect: true,
     debugExec: true,
-    returnEmptyArrayForNoResults: false,
   });
 
-  const x = await conn.query().select("*").from("citizens").where("id", "qsd").exec();
+  const x = await conn
+    .query<{ id: "hello" }>()
+    .select("*")
+    .from("citizens")
+    .where("id", "qsd")
+    .exec();
 
   console.log(x?.[0].id);
 

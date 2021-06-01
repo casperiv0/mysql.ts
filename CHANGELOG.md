@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.0
+
+- **BREAKING:** Remove `returnEmptyArrayForNoResults`
+- Bump dependencies
+- Format code
+
 ## 0.0.20
 
 - Make [`BuilderTypes`](https://github.com/Dev-CasperTheGhost/mysql.ts/blob/main/docs/BuilderTypes.md) options optional

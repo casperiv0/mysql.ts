@@ -8,7 +8,9 @@ import { QueryBuilder } from "./QueryBuilder";
  * @see [https://github.com/mysqljs/mysql#connection-options](https://github.com/mysqljs/mysql#connection-options)
  * @returns The connection
  */
-export async function createConnection<Tables = any>(config: ConnectionConfig): Promise<Connection<Tables>> {
+export async function createConnection<Tables = any>(
+  config: ConnectionConfig,
+): Promise<Connection<Tables>> {
   return new Connection<Tables>(config);
 }
 

@@ -118,7 +118,12 @@ const connection = await createConnection({
   /* ... */
 });
 
-const result = await connection.query().select("*").from("books").whereLike("name", "%cool%").exec();
+const result = await connection
+  .query()
+  .select("*")
+  .from("books")
+  .whereLike("name", "%cool%")
+  .exec();
 ```
 
 [Back to top](#methods)
@@ -130,7 +135,13 @@ const connection = await createConnection({
   /* ... */
 });
 
-const result = await connection.query().select("*").from("books").where("id", "0").and("name", "my-cool-name").exec();
+const result = await connection
+  .query()
+  .select("*")
+  .from("books")
+  .where("id", "0")
+  .and("name", "my-cool-name")
+  .exec();
 ```
 
 [Back to top](#methods)
@@ -198,7 +209,11 @@ const result = await connection
   .exec();
 
 // With chaining
-const result = await connection.query().raw("SELECT * FROM `books`").where("name", "cool-book-name").exec();
+const result = await connection
+  .query()
+  .raw("SELECT * FROM `books`")
+  .where("name", "cool-book-name")
+  .exec();
 ```
 
 [Back to top](#methods)

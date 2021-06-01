@@ -110,7 +110,11 @@ export class Connection<Tables> {
   }
 
   private async addReconnectHandler(connection: mysql.Connection) {
-    const ERROR_CODES = ["PROTOCOL_CONNECTION_LOST", "ECONNRESET", "PROTOCOL_ENQUEUE_AFTER_FATAL_ERROR"];
+    const ERROR_CODES = [
+      "PROTOCOL_CONNECTION_LOST",
+      "ECONNRESET",
+      "PROTOCOL_ENQUEUE_AFTER_FATAL_ERROR",
+    ];
 
     connection.once("error", (err) => {
       if (ERROR_CODES.includes(err)) {

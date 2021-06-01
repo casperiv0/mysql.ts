@@ -7,17 +7,6 @@ export interface ConnectionConfig extends MySQLConnectionConfig {
    * this will show the full query & values when a query is executed with the `QueryBuilder#exec` method
    */
   debugExec?: boolean;
-
-  /**
-   * when no results are found for a query:
-   *
-   * `false` = return `undefined`
-   *
-   * `true` = returns an empty array
-   *
-   * @default false
-   */
-  returnEmptyArrayForNoResults?: boolean;
 }
 
 export interface StatisticsPacket {

@@ -57,7 +57,9 @@ export class QueryBuilder<Tables, T = any> {
       return `${(data as any)[key]}`;
     });
 
-    this.query += `INSERT INTO ${tableName} (${this.createKeys(data)}) VALUES (${this.createValues(data)}) `;
+    this.query += `INSERT INTO ${tableName} (${this.createKeys(data)}) VALUES (${this.createValues(
+      data,
+    )}) `;
     this.values.push(...values);
 
     return this;
@@ -220,7 +222,11 @@ export class QueryBuilder<Tables, T = any> {
       isbn: int({ nullable: false, length: 50 }),
     }).exec()
    */
-  createTable(name: string, primary: keyof T | undefined, columns: Partial<Record<keyof T, string>>) {
+  createTable(
+    name: string,
+    primary: keyof T | undefined,
+    columns: Partial<Record<keyof T, string>>,
+  ) {
     const primaryKey = primary ? `, PRIMARY KEY (${primary})` : "";
     const values = this.createTableValues(columns);
 
@@ -233,7 +239,11 @@ export class QueryBuilder<Tables, T = any> {
    * same as `QueryBuilder#createTable` but only create the table if it doesn't exist
    * @see [https://github.com/Dev-CasperTheGhost/mysql.ts/blob/main/docs/Query.md#create-table](https://github.com/Dev-CasperTheGhost/mysql.ts/blob/main/docs/Query.md#create-table)
    */
-  createTableIfNotExists(name: string, primary: keyof T | undefined, columns: Partial<Record<keyof T, string>>) {
+  createTableIfNotExists(
+    name: string,
+    primary: keyof T | undefined,
+    columns: Partial<Record<keyof T, string>>,
+  ) {
     const primaryKey = primary ? `, PRIMARY KEY (${primary})` : "";
     const values = this.createTableValues(columns);
 
@@ -279,7 +289,7 @@ export class QueryBuilder<Tables, T = any> {
   /**
    * execute the query
    */
-  async exec(options?: Omit<mysql.QueryOptions, "sql" | "values">): Promise<T[] | undefined> {
+  async exec(options?: Omit<mysql.QueryOptions, "sql" | "values">): Promise<(T | undefined)[]> {
     if (this.config.debugExec === true) {
       console.info(`[mysql.ts]: Query: ${this.query}`);
       console.info("[mysql.ts]: Values: ", this.values);
@@ -299,13 +309,7 @@ export class QueryBuilder<Tables, T = any> {
           return reject(err);
         }
 
-        if (this.config.returnEmptyArrayForNoResults) {
-          return resolve(results);
-        } else {
-          if (results.length <= 0) {
-            return resolve(undefined);
-          }
-        }
+        return resolve(results);
       });
     });
   }
