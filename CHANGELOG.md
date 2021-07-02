@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.2
+
+- Add husky git hooks
+
 ## 0.1.1
 
 - Bump dependencies

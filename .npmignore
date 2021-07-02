@@ -6,3 +6,4 @@ docs
 .prettierignore
 .vscode
 .github
+.husky
