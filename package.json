@@ -1,6 +1,6 @@
 {
   "name": "@casper124578/mysql.ts",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "A simple mysql wrapper for node.js",
   "main": "dist/index.js",
   "private": false,
@@ -38,13 +38,13 @@
   },
   "devDependencies": {
     "@casper124578/eslint-config": "^0.0.16",
-    "@types/mysql": "^2.15.18",
-    "@typescript-eslint/eslint-plugin": "^4.28.1",
-    "@typescript-eslint/parser": "^4.28.1",
-    "eslint": "^7.29.0",
+    "@types/mysql": "^2.15.19",
+    "@typescript-eslint/eslint-plugin": "^4.28.5",
+    "@typescript-eslint/parser": "^4.28.5",
+    "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^3.4.0",
-    "husky": "^6.0.0",
+    "husky": "^7.0.1",
     "prettier": "^2.3.2",
     "pretty-quick": "^3.1.1",
     "typescript": "^4.3.5"
