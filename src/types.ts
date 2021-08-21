@@ -1,8 +1,6 @@
-import { ConnectionConfig as MySQLConnectionConfig } from "mysql";
+import { ConnectionConfig as MySQLConnectionConfig } from "promise-mysql";
 
 export interface ConnectionConfig extends MySQLConnectionConfig {
-  reconnect?: boolean;
-
   /**
    * this will show the full query & values when a query is executed with the `QueryBuilder#exec` method
    */
@@ -20,35 +18,11 @@ export interface StatisticsPacket {
   queries_per_second_avg: number;
 }
 
-export interface ChangeUserOptions {
-  /**
-   * the name of the new user (defaults to the previous one)
-   */
-  user?: string;
-
-  /**
-   * the password of the new user (defaults to the previous one)
-   */
-  password?: string;
-
-  /**
-   * the new charset (defaults to the previous one)
-   */
-  charset?: string;
-
-  /**
-   * the new database (defaults to the previous one)
-   */
-  database?: string;
-}
-
-export type EventNames = "error" | "end";
-
 export type CountReturn = {
   "COUNT(*)": number;
 };
 
-export type QueryValue = string | boolean | number;
+export type QueryValue<T = any> = string | boolean | number | T;
 
 export interface BuilderTypeOptions<DefaultType = QueryValue> {
   nullable?: boolean;

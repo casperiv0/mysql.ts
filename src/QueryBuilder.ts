@@ -292,7 +292,7 @@ export class QueryBuilder<Tables, T = any> {
   async exec(options?: Omit<mysql.QueryOptions, "sql" | "values">): Promise<(T | undefined)[]> {
     if (this.config.debugExec === true) {
       console.info(`[mysql.ts]: Query: ${this.query}`);
-      console.info("[mysql.ts]: Values: ", this.values);
+      console.info("[mysql.ts]: Values:", this.values);
     }
 
     if (!this.query) {

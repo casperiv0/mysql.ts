@@ -1,4 +1,4 @@
-import { createConnection } from "../src/index";
+import { createConnection, string } from "../src/index";
 
 type MyTables = "users" | "citizens" | "vehicles";
 
@@ -11,22 +11,21 @@ type MyTables = "users" | "citizens" | "vehicles";
 
 async function test() {
   const conn = await createConnection<MyTables>({
-    host: "192.168.0.140",
+    host: "192.168.0.138",
     user: "root",
     password: "",
     database: "snaily-cad",
-    reconnect: true,
     debugExec: true,
   });
 
   const x = await conn
     .query<{ id: "hello" }>()
-    .select("*")
-    .from("citizens")
-    .where("id", "qsd")
+    .createTable("test", "id", {
+      id: string({ nullable: true }),
+    })
     .exec();
 
-  console.log(x?.[0].id);
+  console.log(x);
 
   // const d = await conn.query().drop("books", "database").exec();
 

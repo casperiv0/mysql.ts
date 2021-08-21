@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.0.0
+
+**Breaking changes:**
+
+- Use `node-promise-mysql` to handle promisifing functions
+- Update and remove non-needed typings
+- Export `BuilderTypes` directly
+
 ## 0.1.3
 
 - Bump dependencies

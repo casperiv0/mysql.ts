@@ -42,10 +42,10 @@ export function date({ nullable = true, DEFAULT }: Omit<BuilderTypeOptions, "len
 /**
  * defaults: `nullable = true`, `DEFAULT = {}`
  */
-export function json({
+export function json<T = any>({
   nullable = true,
-  DEFAULT = {},
-}: Omit<BuilderTypeOptions<any>, "length"> = {}) {
+  DEFAULT = {} as T,
+}: Omit<BuilderTypeOptions<T>, "length"> = {}) {
   return `JSON ${_returnNullable(nullable)} ${_returnDefault(DEFAULT)}`;
 }
 
@@ -63,13 +63,13 @@ export function customType<T = string>(
   type: string,
   { nullable = true, DEFAULT }: BuilderTypeOptions<T>,
 ) {
-  return `${type} ${_returnNullable(nullable)} ${_returnDefault(DEFAULT as any)}`;
+  return `${type} ${_returnNullable(nullable)} ${_returnDefault<T>(DEFAULT)}`;
 }
 
 function _returnNullable(nullable: boolean | undefined) {
   return nullable === false ? "NOT NULL" : "";
 }
 
-function _returnDefault(string: QueryValue | undefined) {
+function _returnDefault<T>(string: QueryValue<T> | undefined) {
   return string ? `DEFAULT '${JSON.stringify(string)}'` : "";
 }

@@ -1,6 +1,6 @@
 import { Connection } from "./Connection";
-import { ConnectionConfig } from "./types";
 import { QueryBuilder } from "./QueryBuilder";
+import { ConnectionConfig } from "./types";
 
 /**
  * create the connection to the database
@@ -9,20 +9,12 @@ import { QueryBuilder } from "./QueryBuilder";
  * @returns The connection
  */
 export async function createConnection<Tables = any>(
-  config: ConnectionConfig,
+  config: ConnectionConfig | string,
 ): Promise<Connection<Tables>> {
-  return new Connection<Tables>(config);
+  return new Connection(config);
 }
 
-export { string, text, int, json, date, timestamp, customType } from "./BuilderTypes";
-export {
-  ConnectionConfig,
-  StatisticsPacket,
-  EventNames,
-  ChangeUserOptions,
-  CountReturn,
-  QueryValue,
-  BuilderTypeOptions,
-} from "./types";
+export * from "./BuilderTypes";
+export * from "./types";
 export { Connection, QueryBuilder };
 export { MysqlError, OkPacket, QueryOptions } from "mysql";
