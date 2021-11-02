@@ -38,7 +38,7 @@
     "promise-mysql": "github:Dev-CasperTheGhost/node-promise-mysql"
   },
   "devDependencies": {
-    "@casper124578/eslint-config": "^0.0.17",
+    "@casper124578/eslint-config": "^1.0.0",
     "@types/mysql": "^2.15.19",
     "@typescript-eslint/eslint-plugin": "^4.30.0",
     "@typescript-eslint/parser": "^4.30.0",
